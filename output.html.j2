@@ -1,0 +1,44 @@
+<html>
+<head>
+<style>
+
+body, td {
+    font-family: Helvetica, sans-serif;
+}
+
+{% for css_color in colors %}
+td.tile-color-{{ loop.index0 }} {background-color: {{ css_color }}; }
+{% endfor %}
+
+td {
+    width: 2em;
+    height: 2em;
+    text-align:center;
+    vertical-align:middle;
+}
+
+td.section-boundary { border-top: 2px double black; }
+
+.tile-table { border: 1px solid black;}
+
+.tile-label {
+    mix-blend-mode: difference;
+    color: white;
+}
+
+</style>
+</head>
+<body>
+<table class="tile-table">
+    {% for row in grid %}
+    {% set rowloop = loop %}
+
+    <tr>
+        {% for color in row %}
+            <td class="tile-color-{{ color }} {% if rowloop.index0 % section_length == 0 %}section-boundary{% endif %}"><span class="tile-label">{{ color }}</span></td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

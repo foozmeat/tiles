@@ -1,0 +1,23 @@
+---
+
+width: 20
+height: 12
+tilesize: 1
+
+# White 1 -> 5 -> 10
+# light green 2 -> -> 5 -> 0
+#
+
+colors: [
+'#FFFFFF',
+'#008040',
+'#008080',
+]
+
+color_weights: [
+
+[ 10, 5, 0 ],
+[ 1, 5, 5  ],
+[ 1, 5, 5  ],
+]
+
