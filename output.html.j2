@@ -11,13 +11,14 @@ td.tile-color-{{ loop.index0 }} {background-color: {{ css_color }}; }
 {% endfor %}
 
 td {
-    width: 2em;
-    height: 2em;
+    width: {{ tilesize }}em;
+    height: {{ tilesize }}em;
     text-align:center;
     vertical-align:middle;
+{#    border: 1px solid black;#}
 }
 
-td.section-boundary { border-top: 2px double black; }
+{#td.section-boundary { border-top: 2px double black; }#}
 
 .tile-table { border: 1px solid black;}
 
@@ -29,10 +30,30 @@ td.section-boundary { border-top: 2px double black; }
 </style>
 </head>
 <body>
+
+<table style="float: right;">
+    {% for color in colors %}
+        <tr><td class="tile-color-{{ loop.index0 }}"><span class="tile-label">{{ color }}</span></td><td>{{ tile_counts[loop.index0] }}</td></tr>
+    {% endfor %}
+    <tr><td><span class="tile-label">Total</span></td><td>{{ tile_count_total }}</td></tr>
+    <tr><td><span class="tile-label">Tile cost</span></td><td>${{ total_cost|round(2, 'floor')  }}</td></tr>
+</table>
+
 <table class="tile-table">
     {% for row in grid %}
     {% set rowloop = loop %}
+    <tr>
+        {% for color in row %}
+            <td class="tile-color-{{ color }} {% if rowloop.index0 % section_length == 0 %}section-boundary{% endif %}">&nbsp;</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+<hr style="page-break-after: always;"/>
 
+<table class="tile-table">
+    {% for row in grid %}
+    {% set rowloop = loop %}
     <tr>
         {% for color in row %}
             <td class="tile-color-{{ color }} {% if rowloop.index0 % section_length == 0 %}section-boundary{% endif %}"><span class="tile-label">{{ color }}</span></td>
