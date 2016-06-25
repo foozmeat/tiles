@@ -36,7 +36,7 @@ td {
         <tr><td class="tile-color-{{ loop.index0 }}"><span class="tile-label">{{ color }}</span></td><td>{{ tile_counts[loop.index0] }}</td></tr>
     {% endfor %}
     <tr><td><span class="tile-label">Total</span></td><td>{{ tile_count_total }}</td></tr>
-    <tr><td><span class="tile-label">Tile cost</span></td><td>${{ total_cost|round(2, 'floor')  }}</td></tr>
+    <tr><td><span class="tile-label">Tile cost</span></td><td>{{ formatted_cost }}</td></tr>
 </table>
 
 <table class="tile-table">

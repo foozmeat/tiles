@@ -1,6 +1,7 @@
 import sys
 from random import random
 
+import locale
 import os
 import yaml
 from jinja2 import Environment, FileSystemLoader
@@ -9,7 +10,7 @@ input_file = open('config.yaml')
 
 config = yaml.load(input_file)
 
-# print config
+locale.setlocale(locale.LC_ALL, config['locale'])
 tilesize = config['tilesize']
 height = config['height']
 width = config['width']
@@ -67,8 +68,10 @@ for s_idx, section in enumerate(buckets):
 
 tile_count_total = sum(tile_counts)
 
-total_sq_ft = width * height / 144
-total_cost = total_sq_ft * float(config['price_per_sq_ft'])
+total_sq_size = width * height / config['tiles_per_sq_unit']
+total_cost = total_sq_size * float(config['price_per_sq_unit'])
+
+formatted_cost = locale.currency(total_cost, symbol=True, grouping=True)
 
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 env = Environment(loader=FileSystemLoader(THIS_DIR), trim_blocks=True)
@@ -80,7 +83,7 @@ context = {
     'tilesize': tilesize,
     'tile_counts': tile_counts,
     'tile_count_total': tile_count_total,
-    'total_cost': total_cost,
+    'formatted_cost': formatted_cost,
 
 }
 

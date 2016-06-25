@@ -27,7 +27,10 @@ color_weights: [
 ]
 ```
 
-This file sets up a 4' x 3' pattern with 4 colors and 6 vertical section with varying color weights defined top to bottom. 
+This file sets up a 4' x 3' pattern with 4 colors and 6 vertical section with varying color weights defined top to bottom.
 Any number of colors and section are possible but the number of sections must divide evenly into the number of rows ( height / tilesize).
-This file produce 
+This configuration will produces an HTML file with a pattern like the following
+
+  ![example tile image](example.png "example tile image")
+
 
