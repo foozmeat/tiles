@@ -23,10 +23,11 @@ sq_unit_price: 30
 smallest_unit_per_box: 12
 
 colors: [
-'#ECE7D4',
-'#BCCA96',
-'#107F7E',
-'#0A516C',
+'#eeeeee',
+'#d6e685',
+'#8cc665',
+'#44a340',
+'#1e6823',
 ]
 
 # weights are listed top to bottom
@@ -34,6 +35,7 @@ color_weights: [
   [ 20, 20, 9, 6, 3, 0 ],
   [ 1,  3,  3, 6, 4, 1  ],
   [ 1,  2,  3, 5, 8, 8  ],
+  [ 0,  0,  1, 4, 7, 12  ],
   [ 0,  0,  1, 4, 7, 12  ],
 ]
 
