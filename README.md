@@ -1,7 +1,7 @@
 # tiles
 A ceramic tile pattern generator
 
-Tiles uses a YAML configuration file to generate random ceramic tile patterns. A sample YAML might look like this
+Tiles uses a YAML configuration file named `config.yaml` to generate random ceramic tile patterns. The following is a sample configuration
 
 ```
 # Set locale for proper currency formatting
@@ -45,13 +45,16 @@ This file sets up a 4' x 3' pattern with 4 colors and 6 vertical sections with v
 Any number of colors and section are possible but the number of sections must divide evenly into the number of rows ( height / tilesize).
 This configuration will produces an HTML file with a pattern like the following
 
-  ![example tile image](example.png "example tile image")
+ ![example tile image](example.png "example tile image")
 
 
 ## Installation & usage
 
     pip install -r requirements.txt
+    cp config.yaml.sample config.yaml
     ./tiles.py
+
+Open `output.html` in your browser and refresh as needed.
 
 ## License
 ```
