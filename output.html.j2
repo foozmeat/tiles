@@ -11,11 +11,10 @@ td.tile-color-{{ loop.index0 }} {background-color: {{ css_color }}; }
 {% endfor %}
 
 td {
-    width: {{ tilesize }}em;
-    height: {{ tilesize }}em;
+    width: {{ tile_size }}em;
+    height: {{ tile_size }}em;
     text-align:center;
     vertical-align:middle;
-{#    border: 1px solid black;#}
 }
 
 {% if show_section_boundaries %}

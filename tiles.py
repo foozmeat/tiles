@@ -1,5 +1,9 @@
+#!/usr/bin/python -u
+
 import sys
 from random import random
+
+import math
 
 import locale
 import os
@@ -11,24 +15,23 @@ input_file = open('config.yaml')
 config = yaml.load(input_file)
 
 locale.setlocale(locale.LC_ALL, config['locale'])
-tilesize = config['tilesize']
+tile_size = config['tile_size']
 height = config['height']
 width = config['width']
 sections = len(config['color_weights'][0])
 num_colors = len(config['color_weights'])
-rows = height / tilesize
-cols = width / tilesize
+rows = height / tile_size
+cols = width / tile_size
 section_length = rows / sections
 
-if height % tilesize != 0:
-    sys.exit("height not divisible by tilesize")
-elif width % tilesize != 0:
-    sys.exit("width not divisible by tilesize")
-elif height % sections != 0:
-    sys.exit("height not divisible by number of sections")
+print "Rows: %s   Cols: %s  Colors: %s   Sections: %s   Section Length: %s" % (rows, cols, num_colors, sections, section_length)
 
-print "Rows: %s   Cols: %s  Colors: %s   Sections: %s   Section Length: %s" % (
-    rows, cols, num_colors, sections, section_length)
+if height % tile_size != 0:
+    sys.exit("height not divisible by tile_size")
+elif width % tile_size != 0:
+    sys.exit("width not divisible by tile_size")
+elif rows % sections != 0:
+    sys.exit("rows not divisible by number of sections")
 
 grid = [[0 for x in range(cols)] for y in range(rows)]
 
@@ -68,8 +71,10 @@ for s_idx, section in enumerate(buckets):
 
 tile_count_total = sum(tile_counts)
 
-total_sq_size = width * height / config['tiles_per_sq_unit']
-total_cost = total_sq_size * float(config['price_per_sq_unit'])
+tiles_per_sq_unit = config['smallest_unit_per_box'] / float(tile_size)
+tile_price = config['sq_unit_price'] / math.pow(tiles_per_sq_unit, 2)
+
+total_cost = tile_count_total * tile_price
 
 formatted_cost = locale.currency(total_cost, symbol=True, grouping=True)
 
@@ -80,7 +85,7 @@ context = {
     'colors': config['colors'],
     'grid': grid,
     'section_length': section_length,
-    'tilesize': tilesize,
+    'tile_size': tile_size,
     'tile_counts': tile_counts,
     'tile_count_total': tile_count_total,
     'formatted_cost': formatted_cost,
