@@ -18,7 +18,9 @@ td {
 {#    border: 1px solid black;#}
 }
 
-{#td.section-boundary { border-top: 2px double black; }#}
+{% if show_section_boundaries %}
+td.section-boundary { border-top: 2px double black; }
+{% endif %}
 
 .tile-table { border: 1px solid black;}
 

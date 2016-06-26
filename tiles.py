@@ -84,7 +84,7 @@ context = {
     'tile_counts': tile_counts,
     'tile_count_total': tile_count_total,
     'formatted_cost': formatted_cost,
-
+    'show_section_boundaries': config['show_section_boundaries'],
 }
 
 rendered_template = env.get_template('output.html.j2').render(context)
